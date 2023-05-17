@@ -13,8 +13,8 @@ public class PositionableObjectManager : MonoBehaviour, ISaveable
     public string Key => "Moving objects";
 
     private List<GameObject> _spawnedObjects = new List<GameObject>();
-    [SerializeField] private Transform _objectContainer;
-    [SerializeField] private GameObject _objectBasePrefab;
+    [SerializeField] private Transform? _objectContainer;
+    [SerializeField] private GameObject? _objectBasePrefab;
 
     private void Awake()
     {
@@ -36,6 +36,11 @@ public class PositionableObjectManager : MonoBehaviour, ISaveable
     public void Spawn(Vector2 position, Quaternion rotation)
     {
         var @object = Instantiate(this._objectBasePrefab, position, rotation, this._objectContainer);
+        if (@object == null) {
+            Debug.LogError("Expected an object to spawn.");
+            return;
+        }
+
         @object.SetActive(true);
         this._spawnedObjects.Add(@object);
     }
@@ -56,7 +61,7 @@ public class PositionableObjectManager : MonoBehaviour, ISaveable
 
         var objectTransforms = @object.ToObject<ObjectTransform[]>();
         if (objectTransforms == null) {
-            Debug.LogWarning("Object transforms could not be properly deserialized.", this);
+            Debug.LogError("Object transforms could not be properly deserialized.", this);
             return;
         }
 

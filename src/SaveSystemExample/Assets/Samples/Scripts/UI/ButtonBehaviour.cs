@@ -6,7 +6,7 @@ using UnityEngine;
 public class ButtonBehaviour : MonoBehaviour
 {
     private SaveManager SaveManager => SaveManager.Instance;
-    [SerializeField] private PositionableObjectManager _positionableObjectManager;
+    [SerializeField] private PositionableObjectManager? _positionableObjectManager;
 
     private void OnGUI()
     {
@@ -15,7 +15,14 @@ public class ButtonBehaviour : MonoBehaviour
 
         if (GUILayout.Button("Spawn an object at a random position"))
         {
-            this._positionableObjectManager.Spawn();
+            if (this._positionableObjectManager == null)
+            {
+                Debug.LogError($"Expected {nameof(this._positionableObjectManager)} to exist.");
+            }
+            else
+            {
+                this._positionableObjectManager.Spawn();
+            }
         }
 
         if (GUILayout.Button("Save the current scene"))
