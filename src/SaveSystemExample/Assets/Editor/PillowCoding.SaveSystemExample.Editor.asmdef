@@ -1,0 +1,16 @@
+{
+    "name": "PillowCoding.SaveSystemExample.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:da432ded137fa064d9613e63b57b0141"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
