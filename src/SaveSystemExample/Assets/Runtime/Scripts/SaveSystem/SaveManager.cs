@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -13,10 +14,43 @@ namespace PillowCoding.SaveManager
         private static SaveManager? _instance;
         public static SaveManager Instance => SaveManager.GetOrFetchSingleton();
 
+        private List<ISaveable> _saveables = new List<ISaveable>();
+
         private void Start()
         {
             Object.DontDestroyOnLoad(this);
         }
+
+        public void Register<TSaveable>(TSaveable saveable)
+            where TSaveable : MonoBehaviour, ISaveable
+        {
+            if (this.HasRegistered(saveable))
+            {
+                Debug.LogWarning($"The saveable {saveable.Key} ({saveable.name}) was already registered.", saveable);
+                return;
+            }
+
+            this._saveables.Add(saveable);
+        }
+
+        public void UnRegister<TSaveable>(TSaveable saveable)
+            where TSaveable : MonoBehaviour, ISaveable
+        {
+            if (!this.HasRegistered(saveable))
+            {
+                Debug.LogWarning($"The saveable {saveable.Key} ({saveable.name}) is not registered.", saveable);
+                return;
+            }
+
+            if (!this._saveables.Remove(saveable))
+            {
+                Debug.LogError($"The saveable {saveable.Key} ({saveable.name}) could not be removed.", saveable);
+            }
+        }
+
+        public bool HasRegistered<TSaveable>(TSaveable saveable)
+            where TSaveable : MonoBehaviour, ISaveable
+            => this._saveables.Any(x => x.Key.ToLower() == saveable.Key.ToLower());
 
         private static SaveManager GetOrFetchSingleton()
         {
