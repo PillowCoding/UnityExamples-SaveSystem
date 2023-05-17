@@ -1,10 +1,12 @@
 using PillowCoding.SaveManager;
-using System.Diagnostics;
 using UnityEngine;
+
+#nullable enable
 
 public class ButtonBehaviour : MonoBehaviour
 {
     private SaveManager SaveManager => SaveManager.Instance;
+    [SerializeField] private PositionableObjectManager _positionableObjectManager;
 
     private void OnGUI()
     {
@@ -13,14 +15,17 @@ public class ButtonBehaviour : MonoBehaviour
 
         if (GUILayout.Button("Spawn an object at a random position"))
         {
+            this._positionableObjectManager.Spawn();
         }
 
         if (GUILayout.Button("Save the current scene"))
         {
+            this.SaveManager.StartSave();
         }
 
         if (GUILayout.Button("Load the saved data into the current scene"))
         {
+            this.SaveManager.StartLoad();
         }
 
         GUILayout.EndArea();
