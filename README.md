@@ -55,9 +55,13 @@ This is a step-by-step instruction on how to run the project.
 
 ### Glossary
 _Singleton_: A term used to indicate that only a single instance is allowed for that given class. In unity you very often see a static "instance" of sorts that references that single instance.
+
 _SaveManager_: The singleton monobehaviour that is responsible for keeping track of saveable classes, and saving/receiving data to/from persistent data.
+
 _PositionableObjectManager_: The example manager that randomly spawns objects which will then be saved by the `SaveManager`.
+
 _ISaveable_: The interface a class is required to implement in order to be eligible for registering inside the `SaveManager`
+
 _Saveable_: A class that is created during the deserialization process, containing the unique key and data for a saveable class.
 
 ### Folder structure
