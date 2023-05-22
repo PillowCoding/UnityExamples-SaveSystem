@@ -44,8 +44,7 @@
 
 ### Getting the project running
 This is a step-by-step instruction on how to run the project.
-1. Clone the repository.
-`https://github.com/PillowCoding/UnityExamples-SaveSystem.git`
+1. Clone the repository: `https://github.com/PillowCoding/UnityExamples-SaveSystem.git`
 2. Open `src/SaveSystemExample` in Unity.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -66,7 +65,9 @@ _Saveable_: A class that is created during the deserialization process, containi
 
 ### Folder structure
 _Editor_: Editor specific scripts. This is currently unused.
+
 _Runtime_: Runtime specific scripts. This contains the main framework of the save system, including the `SaveManager`.
+
 _Samples_: Examples. This contains an example scene and scripts to make the save system working.
 
 ### Usage
